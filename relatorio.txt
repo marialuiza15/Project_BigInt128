@@ -1,0 +1,45 @@
+Alunas: ANA CAROLINA DE ASSIS SOUZA e MARIA LUIZA LIMA BASTOS
+
+
+Um valor do tipo BigInt deve ser representado por um array de 
+bytes, interpretado como um único inteiro de 128 bits, em complemento a 
+2 e seguindo a ordenação little-endian.
+
+Função big_val:
+    o número 1 em 64 bits com ordenação little-endian:
+    01 00 00 00 00 00 00 00 (0x)
+    a funçaõ big_val mantém o valor para os 8 primeiros bytes e repete o
+    bit mais significativo nos outros 8 bytes, completando 128 bits
+
+Função big_comp2:
+    o número 2 em 128 bits com ordenação little-endian:
+    02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 (0x)
+    a função big_comp2 vai:
+        Trocar todos os 0s por 1s e todos os 1s por 0s.
+        Somar 1 ao resultado
+    Assim, "entra" um numero positivo e "sai" o  equivalente negativo
+
+Função big_sum:
+    Vamos somar dois valores em 128 bits com ordenação little-endian, 
+    cada um armazenado como um array de bytes.
+
+    a = 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 (0x0100000000000000)
+    b = 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 (0x0100000000000000)
+
+    A função big_sum somará byte por byte de a e b, somando os dois números
+    Para cada byte, soma-se a[i] + b[i] + carry (é o "vai 1")
+
+Função big_sub: 
+    Vamos fazer a subtração de dois números de 128 bits, somando a com o
+    complemento a 2 de b 
+
+    a = 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 (0x0100000000000000)
+    b = 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 (0x0100000000000000)
+
+    1° Calcula o complemento a 2 de b
+    2° Soma a com o complemento a 2 de b
+
+    Assim, faremos a subtração usando a soma de um valor com o respectivo 
+    negativo do outro
+
+Função big_mul:
